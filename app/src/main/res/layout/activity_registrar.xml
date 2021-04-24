@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegistrarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="408dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="NOMBRE"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtnombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="PAIS"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtpais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="CIUDAD"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtciudad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="TECNICO" />
+
+        <EditText
+            android:id="@+id/edtecnico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:text="Nro CAMPEONATOS"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtcampeonatos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnguardar"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:text="GUARDAR"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnregresar"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="REGRESAR"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>
