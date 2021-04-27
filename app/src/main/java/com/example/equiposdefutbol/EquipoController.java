@@ -45,6 +45,18 @@ public class EquipoController {
             return false;
         }
     }
+    public Cursor allEquipo2(){
+        try{
+            SQLiteDatabase sql = bd.getReadableDatabase();
+            Cursor cur = sql.rawQuery("select nombre as  nombre, pais, ciudad, tecnico, campeonatos from equipo", null);
+            return cur;
+        }
+        catch (Exception ex){
+            Toast.makeText(c, "Error consulta de equipo " + ex.getMessage(), Toast.LENGTH_LONG).show();
+            return null;
+        }
+
+    }
 
 
     /*public ArrayList<String> getFiltro(String clave){

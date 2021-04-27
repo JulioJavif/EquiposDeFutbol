@@ -33,7 +33,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i2 = new Intent(this, FiltroActivity.class);
                 startActivity(i2);
                 break;
+            case R.id.btnlistado:
+                Intent e= new Intent(this, ListadoActivity.class);
+                startActivity(e);
+                break;
+
         }
+
 
     }
 }
