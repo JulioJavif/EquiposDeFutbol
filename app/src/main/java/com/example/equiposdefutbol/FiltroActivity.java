@@ -1,6 +1,8 @@
 package com.example.equiposdefutbol;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.database.Cursor;
 import android.widget.SearchView;
 //import androidx.appcompat.widget.SearchView;
 //import androidx.appcompat.widget.SearchView;
@@ -15,7 +17,6 @@ public class FiltroActivity extends AppCompatActivity {
 
     SearchView filtrar;
     ListView lista;
-    ArrayAdapter<String> adapter;
     EquipoController ec;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +26,15 @@ public class FiltroActivity extends AppCompatActivity {
         filtrar = findViewById(R.id.buscar);
         lista = findViewById(R.id.lvLista);
 
-        ArrayList<String> busqueda;
-        busqueda = ec.getEquipos();
-        if (!busqueda.isEmpty()) {
-            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, busqueda);
-            lista.setAdapter(adapter);
-        } else {
-            busqueda.add("No se encontraron equipos");
-            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, busqueda);
-            lista.setAdapter(adapter);
+        Cursor c = ec.allEquipo2();
+        ArrayList<String> listado = new ArrayList<String>();
+        while(c.moveToNext()){
+            String equipo = c.getString(0)+" | "+c.getString(1)+" | "
+                    +c.getString(2)+" | "+c.getString(3)+" | "+c.getString(4);
+            listado.add(equipo);
         }
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listado);
+        lista.setAdapter(adapter);
 
         filtrar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

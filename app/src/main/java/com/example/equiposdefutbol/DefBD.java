@@ -13,8 +13,8 @@ public class DefBD {
     public static final String create_tabla_est = "CREATE TABLE IF NOT EXISTS " + DefBD.tabla_est + " ( " +
             DefBD.col_nombre + " text primary key," +
             DefBD.col_pais + " text," +
-            DefBD.col_ciudad + " text" +
-            DefBD.col_tecnico + " text" +
+            DefBD.col_ciudad + " text," +
+            DefBD.col_tecnico + " text," +
             DefBD.col_campeonatos + " text" +
             ");";
 

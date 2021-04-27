@@ -26,7 +26,7 @@ public class EquipoController {
             valores.put(DefBD.col_campeonatos,e.getCampeonatos());
             long id = sql.insert(DefBD.tabla_est, null, valores);
             //sql.execSQL("insert into " + DefBD.tabla_est + " values (" + e.getCodigo() + "," + e.getNombre() + "," + e.getPrograma() +");");
-            Toast.makeText(c, "Estudiante registrado", Toast.LENGTH_LONG).show();
+            Toast.makeText(c, "Equipo registrado", Toast.LENGTH_LONG).show();
         }
         catch(Exception ex){
             Toast.makeText(c, "Error agregando estudiante " + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -48,7 +48,14 @@ public class EquipoController {
     public Cursor allEquipo2(){
         try{
             SQLiteDatabase sql = bd.getReadableDatabase();
-            Cursor cur = sql.rawQuery("select nombre as  nombre, pais, ciudad, tecnico, campeonatos from equipo", null);
+            Cursor cur =
+                    sql.query(DefBD.tabla_est,
+                    new String[]{"nombre", "pais", "ciudad", "tecnico", "campeonatos"},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null);
             return cur;
         }
         catch (Exception ex){
