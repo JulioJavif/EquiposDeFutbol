@@ -44,8 +44,12 @@ public class RegistrarActivity extends AppCompatActivity implements View.OnClick
                 }else{
                     e= new Equipo(nombre.getText().toString(),pais.getText().toString(),ciudad.getText().toString(),
                             tecnico.getText().toString(),campeonatos.getText().toString());
-                    ec.agregarEquipo(e);
-                 }
+                    if(ec.buscarEquipo(e)){
+                        Toast.makeText(this,"El equipo ya existe", Toast.LENGTH_LONG).show();
+                    }else{
+                        ec.agregarEquipo(e);
+                    }
+                }
         }
     }
 }
