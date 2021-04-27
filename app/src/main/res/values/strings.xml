@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EquiposDeFutbol</string>
+    <string name="filtro_equipos">Filtro</string>
 </resources>

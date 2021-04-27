@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i= new Intent(this, RegistrarActivity.class);
                 startActivity(i);
                 break;
+            case R.id.btnbuscar:
+                Intent i2 = new Intent(this, FiltroActivity.class);
+                startActivity(i2);
+                break;
         }
 
     }

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class EquipoController {
     private BaseDatos bd;
     private Context c;
@@ -44,4 +46,48 @@ public class EquipoController {
         }
     }
 
+
+    /*public ArrayList<String> getFiltro(String clave){
+        SQLiteDatabase sqlite = bd.getReadableDatabase();
+        Cursor cursor = sqlite.query(DefBD.tabla_est,
+                                        new String[]{"equipo", "pais", "campeonatos"},
+                                "pais=? or campeonatos=?",
+                                        new String[]{clave, clave},
+                                null,
+                                null,
+                                null);
+        if(cursor.getCount()>0){
+            ArrayList<String> lista = new ArrayList<String>();
+            while(cursor.moveToNext()){
+                lista.add(cursor.getString(1)+" | "+cursor.getString(2)+" | "+cursor.getString(3));
+            }
+            return lista;
+        }
+        return null;
+    }*/
+
+    public ArrayList<String> getEquipos() {
+        try {
+            SQLiteDatabase sqlite = bd.getReadableDatabase();
+            Cursor cursor = sqlite.query(DefBD.tabla_est,
+                    new String[]{"equipo", "pais", "campeonatos"},
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            ArrayList<String> lista = new ArrayList<String>();
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    String equipo = cursor.getString(1) + " | " + cursor.getString(2) + " | " + cursor.getString(3);
+                    lista.add(equipo);
+                }
+                return lista;
+            }
+            return lista;
+        } catch (Exception e) {
+            Toast.makeText(c, "Error al leer en la DDBB: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        return null;
+    }
 }
