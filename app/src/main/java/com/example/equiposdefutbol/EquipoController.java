@@ -2,6 +2,7 @@ package com.example.equiposdefutbol;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
@@ -29,4 +30,18 @@ public class EquipoController {
             Toast.makeText(c, "Error agregando estudiante " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+    public boolean buscarEquipo(Equipo e){
+        String arg[]= new String[]{e.getNombre()};
+        SQLiteDatabase sql= bd.getReadableDatabase();
+        Cursor c=  sql.query(DefBD.tabla_est,null, "nombre=?",arg,null,null,null);
+        if(c.getCount()>0){
+            bd.close();
+            return true;
+        }
+        else{
+            bd.close();
+            return false;
+        }
+    }
+
 }
