@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class EquipoController {
     private BaseDatos bd;
@@ -31,29 +32,33 @@ public class EquipoController {
             Toast.makeText(c, "Equipo registrado", Toast.LENGTH_LONG).show();
         }
         catch(Exception ex){
-            Toast.makeText(c, "Error agregando estudiante " + ex.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(c, "Error agregando equipo " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    public boolean buscarEquipo(Equipo e) {
-        String arg[] = new String[]{e.getNombre()};
+    public Cursor buscarEquipo(String nombre) {
+        nombre = nombre.substring(0, nombre.length()-1);
         SQLiteDatabase sql = bd.getReadableDatabase();
-        Cursor c = sql.query(DefBD.tabla_est, null, "nombre=?", arg, null, null, null);
+        Cursor c = sql.query(DefBD.tabla_est,
+                new String[]{"nombre","pais","ciudad","tecnico", "campeonatos"},
+                "nombre=?",
+                new String[]{nombre},
+                null,
+                null,
+                null);
+        //Toast.makeText( this.c, "count: "+c.getCount()+"\nnombre: "+nombre+"\nlong: "+nombre.length(), Toast.LENGTH_LONG).show();
         if (c.getCount() > 0) {
-            bd.close();
-            return true;
+            return c;
         } else {
-            bd.close();
-            return false;
+            return null;
         }
     }
 
     public Cursor allEquipo2() {
         try {
             SQLiteDatabase sql = bd.getReadableDatabase();
-            Cursor cur =
-                    sql.query(DefBD.tabla_est,
-                    new String[]{"nombre", "pais", "ciudad", "tecnico", "campeonatos"},
+            Cursor cur = sql.query(DefBD.tabla_est,
+                            new String[]{"nombre", "pais", "ciudad", "tecnico", "campeonatos"},
                             null,
                             null,
                             null,
@@ -66,26 +71,6 @@ public class EquipoController {
         }
 
     }
-
-
-    /*public ArrayList<String> getFiltro(String clave){
-        SQLiteDatabase sqlite = bd.getReadableDatabase();
-        Cursor cursor = sqlite.query(DefBD.tabla_est,
-                                        new String[]{"equipo", "pais", "campeonatos"},
-                                "pais=? or campeonatos=?",
-                                        new String[]{clave, clave},
-                                null,
-                                null,
-                                null);
-        if(cursor.getCount()>0){
-            ArrayList<String> lista = new ArrayList<String>();
-            while(cursor.moveToNext()){
-                lista.add(cursor.getString(1)+" | "+cursor.getString(2)+" | "+cursor.getString(3));
-            }
-            return lista;
-        }
-        return null;
-    }*/
 
     public ArrayList<String> getEquipos() {
         try {

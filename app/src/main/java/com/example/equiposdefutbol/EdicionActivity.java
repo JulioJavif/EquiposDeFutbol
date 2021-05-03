@@ -15,25 +15,30 @@ public class EdicionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edicion);
+
         Intent i= getIntent();
-        String nom= i.getStringExtra("nombre");
+        String nombre= i.getStringExtra("nombre");
         String pais= i.getStringExtra("pais");
         String ciudad=i.getStringExtra("ciudad");
         String tecnico= i.getStringExtra("tecnico");
         String campeonato=i.getStringExtra("campeonatos");
-        dnombre=findViewById(R.id.edtnombre);
-        dpais=findViewById(R.id.edtpais);
-        dciudad=findViewById(R.id.edtciudad);
-        dtecnico=findViewById(R.id.edtecnico);
-        dcampeonato=findViewById(R.id.edtcampeonatos);
+
+        dnombre=findViewById(R.id.idnombre);
+        dpais=findViewById(R.id.idpais);
+        dciudad=findViewById(R.id.idciudad);
+        dtecnico=findViewById(R.id.idtecnico);
+        dcampeonato=findViewById(R.id.idcampeonatos);
         eliminar=findViewById(R.id.btneliminar);
         actualizar= findViewById(R.id.btnactualizar);
-        dnombre.setText(nom);
-        dnombre.setEnabled(false);
-        dpais.setText(pais);
-        dciudad.setText(ciudad);
-        dtecnico.setText(tecnico);
-        dcampeonato.setText(campeonato);
+
+        if (!nombre.isEmpty()){
+            dnombre.setText(nombre);
+            dnombre.setEnabled(false);
+            dpais.setText(pais);
+            dciudad.setText(ciudad);
+            dtecnico.setText(tecnico);
+            dcampeonato.setText(campeonato);
+        }
 
         eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +49,7 @@ public class EdicionActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
         actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

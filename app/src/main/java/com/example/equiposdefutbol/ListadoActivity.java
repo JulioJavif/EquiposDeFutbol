@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class ListadoActivity extends AppCompatActivity {
     ListView listado;
@@ -37,20 +38,25 @@ public class ListadoActivity extends AppCompatActivity {
         listado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView nombre = view.findViewById(R.id.txtnombre);
-                TextView pais = view.findViewById(R.id.txtpais);
-                TextView ciudad = view.findViewById(R.id.txtciudad);
-                TextView tecnico=view.findViewById(R.id.txtecnico);
-                TextView campeonatos=view.findViewById(R.id.txtcampeonatos);
-                Toast.makeText(getApplicationContext(),nombre.getText().toString() + "," + pais.getText().toString()
-                        + "," + ciudad.getText().toString()+ "," + tecnico.getText() + ";" +campeonatos.getText(), Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), EdicionActivity.class);
-                i.putExtra("nombre", nombre.getText().toString());
-                i.putExtra("pais", pais.getText().toString());
-                i.putExtra("ciudad", ciudad.getText().toString());
-                i.putExtra("tecnico", tecnico.getText().toString());
-                i.putExtra("campeonatos", campeonatos.getText().toString());
-                startActivity(i);
+
+                String datos = lista.get(position);
+                StringTokenizer tokenizer = new StringTokenizer(datos);
+                String nombre = tokenizer.nextToken("|");
+
+                //Toast.makeText( getApplicationContext(), nombre, Toast.LENGTH_LONG).show();
+
+                Cursor cursor = equipoController.buscarEquipo(nombre);
+
+                if (cursor!=null && cursor.moveToNext()){
+                    Intent i = new Intent(getApplicationContext(), EdicionActivity.class);
+                    //cursor.moveToFirst();
+                    i.putExtra("nombre", cursor.getString(0));
+                    i.putExtra("pais", cursor.getString(1));
+                    i.putExtra("ciudad", cursor.getString(2));
+                    i.putExtra("tecnico", cursor.getString(3));
+                    i.putExtra("campeonatos", cursor.getString(4));
+                    startActivity(i);
+                }
             }
         });
     }
